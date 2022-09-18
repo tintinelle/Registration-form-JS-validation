@@ -59,7 +59,7 @@ a:hover {
     color: darkred;
 }
 
-.error__message_border {
+/* .error__message_border {
     margin-top: 2%;
     margin-bottom: 2%;
     border: 1px solid darkred;
@@ -67,4 +67,4 @@ a:hover {
 
 .error__input {
     border: 1px solid darkred;
-}
+} */
