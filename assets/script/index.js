@@ -15,6 +15,16 @@ let errors = [];
     // Ввожу переменную для проверки валидации, в каждом кейсе с ошибкой isOk будет false
 let isOk = true; 
 
+class User {
+    constructor (login, email, password, birthYear, country) {
+        this.login = login;
+        this.email = email;
+        this.password = password;
+        this.birthYear = birthYear;
+        this.country = country;
+    }
+}
+
 const checkValidity = (input) => {
     let validity = input.validity;
 
@@ -22,7 +32,6 @@ const checkValidity = (input) => {
 
     if (validity.valueMissing) {
         errors.push(`Please fill in the ${input.name} field.`);
-
         isOk = false;
     }
 
@@ -101,6 +110,26 @@ const checkCheckbox = () => {
     }
 };
 
+const sendToServer = () => {
+    const country = document.getElementById('country').options[document.getElementById('country').selectedIndex].value;
+
+    let user = new User (login.value, email.value, password.value, birthYear.value, country);
+
+    fetch ('https://httpbin.org/post',
+    {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+        },
+    })
+    .then (response => response.json())
+    .then (data => {
+        console.log (data);
+    })
+    .catch (error => console.log(error));
+}
+
 const checkAll = () => {
     errorDiv.innerHTML = '';
     errors = [];
@@ -128,6 +157,7 @@ const checkAll = () => {
     // Конечная проверка на валидность по всем пунктам
     if (isOk) {
         alert(`Welcome to the website, ${login.value}!`);
+        sendToServer();
     }
 };
 
