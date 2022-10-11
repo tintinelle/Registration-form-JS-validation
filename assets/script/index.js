@@ -110,6 +110,8 @@ const checkCheckbox = () => {
     }
 };
 
+
+// отправка на сервер
 const sendToServer = () => {
     const country = document.getElementById('country').options[document.getElementById('country').selectedIndex].value;
 
